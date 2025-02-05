@@ -11,11 +11,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class elementPage extends baseTest {
-    private WebDriver driver;
+    public WebDriver driver;
 
-    @FindBy(xpath ="//a[@href='/shop']")
+    @FindBy(xpath ="//a[@href='/about-mercatus']")
     public WebElement bookStoreApplication;
 
+    // thiet lap page factory
     public void elementPageFactory(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -34,15 +35,7 @@ public class elementPage extends baseTest {
         scrollPage();
     }*/
 
-    @Test
-    public void getTitle() {
-        Assert.assertEquals(driver.getTitle(), "DemoQA");
-    }
 
-    @Test
-    public void clickBookStoreApplication() throws InterruptedException {
-        clickElement(bookStoreApplication);
-    }
 
 
 
