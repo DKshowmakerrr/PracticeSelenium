@@ -25,11 +25,11 @@ public class testElementPage extends baseTest {
 
     @Test
     public void getTitle() {
-        Assert.assertEquals(driver.getTitle(), "DemoQA");
+        Assert.assertEquals(driver.getTitle(), "Selenium - Automation Practice Form");
     }
 
-    @Test
+    /*@Test
     public void clickBookStoreApplication() throws InterruptedException {
         clickElement(elementPage.bookStoreApplication);
-    }
+    }*/
 }

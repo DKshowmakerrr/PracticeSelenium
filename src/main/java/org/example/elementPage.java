@@ -13,8 +13,22 @@ import org.testng.annotations.Test;
 public class elementPage extends baseTest {
     public WebDriver driver;
 
-    @FindBy(xpath ="//a[@href='/about-mercatus']")
-    public WebElement bookStoreApplication;
+    //element của các label
+    @FindBy(xpath ="//label[text()='Full Name :']")
+    public WebElement fullNameLabel;
+
+    @FindBy(xpath ="//label[text()='Email :']")
+    public WebElement emailLabel;
+
+    @FindBy(xpath ="//label[text()='Current Address :']")
+    public WebElement currentAddressLabel;
+
+    @FindBy(xpath ="//label[text()='Password']")
+    public WebElement passwordLabel;
+
+    /*cookie
+    @FindBy(xpath ="//button[@class='cookie-consent__accept-button']")
+    public WebElement cookieButton;*/
 
     // thiet lap page factory
     public void elementPageFactory(WebDriver driver) {
@@ -25,19 +39,11 @@ public class elementPage extends baseTest {
 
     @BeforeClass
     public void openPage() {
-        setBrowser("chrome", "https://shop.mercatus.com");
+        setBrowser("chrome", "https://www.tutorialspoint.com/selenium/practice/text-box.php");
         driver = getDriver();
         elementPageFactory(driver);
+        //cookieButton.click();
     }
-
-   /* @BeforeMethod
-    public void waitForElement() {
-        scrollPage();
-    }*/
-
-
-
-
 
     @AfterClass
     public void closeHomePage() {

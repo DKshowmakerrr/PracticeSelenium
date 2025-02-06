@@ -54,13 +54,19 @@ public class baseTest {
         if (driver != null) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView();", element);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            //wait.until(ExpectedConditions.elementToBeClickable(element));
             js.executeScript("arguments[0].click();", element);
         }
     }
-
-
+    //check xem label có hiển thị hay không
+    public void labelIsDisplayed(WebElement element) {
+        if (element.isDisplayed()) {
+            System.out.println("Label is displayed");
+        } else {
+            System.out.println("Label is not displayed");
+        }
+    }
     public void clickElement(WebElement element) {
         if (element.isEnabled()) {
             element.click();
