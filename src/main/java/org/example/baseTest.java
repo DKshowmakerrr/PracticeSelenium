@@ -11,7 +11,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -54,8 +53,8 @@ public class baseTest {
         if (driver != null) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView();", element);
-            //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            //wait.until(ExpectedConditions.elementToBeClickable(element));
+            /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.elementToBeClickable(element));*/
             js.executeScript("arguments[0].click();", element);
         }
     }
@@ -73,9 +72,9 @@ public class baseTest {
         }
     }
 
-    public void enterText(String locator, String text) {
+    public void enterText(WebElement element, String text) {
         if (driver != null) {
-            driver.findElement(By.xpath(locator)).sendKeys(text);
+            element.sendKeys(text);
         }
     }
 

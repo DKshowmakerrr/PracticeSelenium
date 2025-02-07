@@ -1,21 +1,24 @@
 package pageTest;
 
 import org.example.baseTest;
-import org.example.elementPage;
+import org.example.checkBoxPage;
+import org.example.textBoxPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class testElementPage extends baseTest {
-    private WebDriver driver;
-    elementPage elementPage = new elementPage();
+public class testCheckBoxPage extends baseTest {
+    checkBoxPage elementPage = new checkBoxPage();
+    public WebDriver driver;
 
     @BeforeClass
-    public void setDriver() {
-        elementPage.openPage();
+    public void openPage() {
+        setBrowser("chrome", "https://www.tutorialspoint.com/selenium/practice/text-box.php");
         driver = getDriver();
+        elementPage.elementPageFactory(driver);
+        //cookieButton.click();
     }
 
     @AfterClass
@@ -24,9 +27,10 @@ public class testElementPage extends baseTest {
     }
 
     @Test
-    public void getTitle() {
-        Assert.assertEquals(driver.getTitle(), "Selenium - Automation Practice Form");
+    public void clickOnPlus() {
+        clickElement(elementPage.plusLabels);
     }
+
 
     /*@Test
     public void clickBookStoreApplication() throws InterruptedException {
