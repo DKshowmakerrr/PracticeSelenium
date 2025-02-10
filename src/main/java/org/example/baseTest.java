@@ -53,8 +53,6 @@ public class baseTest {
         if (driver != null) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView();", element);
-            /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.elementToBeClickable(element));*/
             js.executeScript("arguments[0].click();", element);
         }
     }
@@ -66,9 +64,12 @@ public class baseTest {
             System.out.println("Label is not displayed");
         }
     }
-    public void clickElement(WebElement element) {
+    public void clickElement(WebElement element) throws Exception {
         if (element.isEnabled()) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
+            Thread.sleep(3000);
         }
     }
 

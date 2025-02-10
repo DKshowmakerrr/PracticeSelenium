@@ -10,14 +10,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class testCheckBoxPage extends baseTest {
-    checkBoxPage elementPage = new checkBoxPage();
+    checkBoxPage elementCheckBoxPage = new checkBoxPage();
     public WebDriver driver;
 
     @BeforeClass
     public void openPage() {
-        setBrowser("chrome", "https://www.tutorialspoint.com/selenium/practice/text-box.php");
+        setBrowser("chrome", "https://www.tutorialspoint.com/selenium/practice/check-box.php");
         driver = getDriver();
-        elementPage.elementPageFactory(driver);
+        elementCheckBoxPage.elementPageFactory(driver);
         //cookieButton.click();
     }
 
@@ -27,8 +27,8 @@ public class testCheckBoxPage extends baseTest {
     }
 
     @Test
-    public void clickOnPlus() {
-        clickElement(elementPage.plusLabels);
+    public void clickOnPlus() throws Exception {
+        clickElement(elementCheckBoxPage.plusLabels);
     }
 
 
