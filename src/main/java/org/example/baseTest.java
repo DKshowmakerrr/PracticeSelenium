@@ -49,11 +49,12 @@ public class baseTest {
         }
     }
 
-    public void scrollPage(WebElement element) throws InterruptedException {
-        if (driver != null) {
+    public void scrollAndClick(WebElement element) throws InterruptedException {
+        if (driver != null && element.isEnabled()) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView();", element);
             js.executeScript("arguments[0].click();", element);
+            Thread.sleep(3000);
         }
     }
     //check xem label có hiển thị hay không
@@ -64,14 +65,14 @@ public class baseTest {
             System.out.println("Label is not displayed");
         }
     }
-    public void clickElement(WebElement element) throws Exception {
+    /*public void clickElement(WebElement element) throws Exception {
         if (element.isEnabled()) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
             Thread.sleep(3000);
         }
-    }
+    }*/
 
     public void enterText(WebElement element, String text) {
         if (driver != null) {
