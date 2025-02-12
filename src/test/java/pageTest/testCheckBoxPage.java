@@ -57,8 +57,49 @@ public class testCheckBoxPage extends baseTest {
         }
     }
 
-    @Test
-    public void checkSelectedMain() throws InterruptedException {
-        checkNonSelectedMain();
+    @Test //khi click vao main checkbox, tat ca cac checkbox con cua no deu duoc chon
+    public void checkSelectMain() throws InterruptedException {
+        for (WebElement elementCheckBoxMain : elementCheckBoxPage.mainCheckBoxes) {
+            scrollAndClick(elementCheckBoxMain);
+        }
+        for(WebElement elementCheckBoxSub : elementCheckBoxPage.subCheckBoxes) {
+            Assert.assertTrue(elementCheckBoxSub.isSelected());
+        }
+        for(WebElement elementCheckBoxLast : elementCheckBoxPage.lastCheckBoxes) {
+            Assert.assertTrue(elementCheckBoxLast.isSelected());
+        }
+    }
+
+    @Test //khi click vao main checkbox again, tat ca cac checkbox con cua no deu duoc bo chon
+    public void checkUnselectMain() throws InterruptedException {
+        for (WebElement elementCheckBoxMain : elementCheckBoxPage.mainCheckBoxes) {
+            scrollAndClick(elementCheckBoxMain);
+        }
+        checkNonSelectedSub();
+        checkNonSelectedLast();
+    }
+
+    @Test //khi click vao sub checkbox, cac last checkbox cua no duoc chon
+    public void checkSelectSub() throws InterruptedException {
+        for (WebElement elementCheckBoxSub : elementCheckBoxPage.subCheckBoxes) {
+            scrollAndClick(elementCheckBoxSub);
+        }
+        for(WebElement elementCheckBoxLast : elementCheckBoxPage.lastCheckBoxes) {
+            Assert.assertTrue(elementCheckBoxLast.isSelected());
+        }
+    }
+
+    private void checkAllSelected(WebElement mainCheckBox, Iterable<WebElement> subCheckBoxes, Iterable<WebElement> lastCheckBoxes) {
+        Assert.assertTrue(mainCheckBox.isSelected(), "Main checkbox is not selected");
+
+        // Kiểm tra các subCheckboxes
+        for (WebElement elementCheckBoxSub : subCheckBoxes) {
+            Assert.assertTrue(elementCheckBoxSub.isSelected(), "Sub checkbox is not selected");
+        }
+
+        // Kiểm tra các lastCheckboxes
+        for (WebElement elementCheckBoxLast : lastCheckBoxes) {
+            Assert.assertTrue(elementCheckBoxLast.isSelected(), "Last checkbox is not selected");
+        }
     }
 }
