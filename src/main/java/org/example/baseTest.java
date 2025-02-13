@@ -11,7 +11,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class baseTest {
@@ -73,6 +76,19 @@ public class baseTest {
             Thread.sleep(3000);
         }
     }*/
+    //check cac checkbox la non-selected
+    public void checkNonSelected(List<WebElement> checkboxes) {
+        for (WebElement checkBox : checkboxes) {
+            Assert.assertFalse(checkBox.isSelected());
+        }
+    }
+
+    //check cac checkbox la selected
+    public void checkSelected(List<WebElement> checkboxes) {
+        for (WebElement checkBox : checkboxes) {
+            Assert.assertTrue(checkBox.isSelected());
+        }
+    }
 
     public void enterText(WebElement element, String text) {
         if (driver != null) {

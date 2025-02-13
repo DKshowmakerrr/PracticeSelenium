@@ -35,26 +35,11 @@ public class testCheckBoxPage extends baseTest {
         }
     }
 
-    //check cac checkbox la non-selected
-    @Test //main checkbox la non-selected
-    public void checkNonSelectedMain() {
-        for (WebElement elementCheckBoxMain : elementCheckBoxPage.mainCheckBoxes) {
-            Assert.assertFalse(elementCheckBoxMain.isSelected());
-        }
-    }
-
-    @Test //sub checkbox la non-selected
-    public void checkNonSelectedSub() {
-        for (WebElement elementCheckBoxSub : elementCheckBoxPage.subCheckBoxes) {
-            Assert.assertFalse(elementCheckBoxSub.isSelected());
-        }
-    }
-
-    @Test //main checkbox la non-selected
-    public void checkNonSelectedLast() {
-        for (WebElement elementCheckBoxLast : elementCheckBoxPage.lastCheckBoxes) {
-            Assert.assertFalse(elementCheckBoxLast.isSelected());
-        }
+    @Test //tat ca main checkbox, sub checkbox, last checkbox deu la non-selected
+    public void checkNonSelected() {
+        checkNonSelected(elementCheckBoxPage.mainCheckBoxes);
+        checkNonSelected(elementCheckBoxPage.subCheckBoxes);
+        checkNonSelected(elementCheckBoxPage.lastCheckBoxes);
     }
 
     @Test //khi click vao main checkbox, tat ca cac checkbox con cua no deu duoc chon
@@ -62,12 +47,9 @@ public class testCheckBoxPage extends baseTest {
         for (WebElement elementCheckBoxMain : elementCheckBoxPage.mainCheckBoxes) {
             scrollAndClick(elementCheckBoxMain);
         }
-        for(WebElement elementCheckBoxSub : elementCheckBoxPage.subCheckBoxes) {
-            Assert.assertTrue(elementCheckBoxSub.isSelected());
-        }
-        for(WebElement elementCheckBoxLast : elementCheckBoxPage.lastCheckBoxes) {
-            Assert.assertTrue(elementCheckBoxLast.isSelected());
-        }
+        checkSelected(elementCheckBoxPage.mainCheckBoxes);
+        checkSelected(elementCheckBoxPage.subCheckBoxes);
+        checkSelected(elementCheckBoxPage.lastCheckBoxes);
     }
 
     @Test //khi click vao main checkbox again, tat ca cac checkbox con cua no deu duoc bo chon
@@ -75,31 +57,47 @@ public class testCheckBoxPage extends baseTest {
         for (WebElement elementCheckBoxMain : elementCheckBoxPage.mainCheckBoxes) {
             scrollAndClick(elementCheckBoxMain);
         }
-        checkNonSelectedSub();
-        checkNonSelectedLast();
+        checkNonSelected(elementCheckBoxPage.mainCheckBoxes);
+        checkNonSelected(elementCheckBoxPage.subCheckBoxes);
+        checkNonSelected(elementCheckBoxPage.lastCheckBoxes);
     }
 
-    @Test //khi click vao sub checkbox, cac last checkbox cua no duoc chon
+    @Test //khi click vao sub checkbox, tat ca checkbox con cua no deu duoc chon
     public void checkSelectSub() throws InterruptedException {
         for (WebElement elementCheckBoxSub : elementCheckBoxPage.subCheckBoxes) {
             scrollAndClick(elementCheckBoxSub);
         }
-        for(WebElement elementCheckBoxLast : elementCheckBoxPage.lastCheckBoxes) {
-            Assert.assertTrue(elementCheckBoxLast.isSelected());
-        }
+        checkSelected(elementCheckBoxPage.mainCheckBoxes);
+        checkSelected(elementCheckBoxPage.subCheckBoxes);
+        checkSelected(elementCheckBoxPage.lastCheckBoxes);
     }
 
-    private void checkAllSelected(WebElement mainCheckBox, Iterable<WebElement> subCheckBoxes, Iterable<WebElement> lastCheckBoxes) {
-        Assert.assertTrue(mainCheckBox.isSelected(), "Main checkbox is not selected");
-
-        // Kiểm tra các subCheckboxes
-        for (WebElement elementCheckBoxSub : subCheckBoxes) {
-            Assert.assertTrue(elementCheckBoxSub.isSelected(), "Sub checkbox is not selected");
+    @Test //khi click vao sub checkbox again, tat ca checkbox con cua no deu duoc bo chon
+    public void checkUnSelectSub() throws InterruptedException {
+        for (WebElement elementCheckBoxSub : elementCheckBoxPage.subCheckBoxes) {
+            scrollAndClick(elementCheckBoxSub);
         }
-
-        // Kiểm tra các lastCheckboxes
-        for (WebElement elementCheckBoxLast : lastCheckBoxes) {
-            Assert.assertTrue(elementCheckBoxLast.isSelected(), "Last checkbox is not selected");
-        }
+        checkNonSelected(elementCheckBoxPage.mainCheckBoxes);
+        checkNonSelected(elementCheckBoxPage.subCheckBoxes);
+        checkNonSelected(elementCheckBoxPage.lastCheckBoxes);
     }
+
+    @Test //khi click vao last checkbox, tat ca cac checkbox main va sub deu duoc chon
+    public void checkSelectLast() throws InterruptedException {
+        for (WebElement elementCheckBoxLast : elementCheckBoxPage.lastCheckBoxes) {
+            scrollAndClick(elementCheckBoxLast);
+        }
+        checkSelected(elementCheckBoxPage.mainCheckBoxes);
+        checkSelected(elementCheckBoxPage.subCheckBoxes);
+        checkSelected(elementCheckBoxPage.lastCheckBoxes);
+    }
+
+    @Test //khi click vao last checkbox again, tat ca cac checkbox main va sub deu duoc bo chon
+    public void checkUnselectLast() throws InterruptedException {
+        WebElement elementCheckBoxLast = elementCheckBoxPage.lastCheckBoxes.get(0);
+        scrollAndClick(elementCheckBoxLast);
+        Assert.assertFalse(elementCheckBoxPage.mainCheckBoxes.get(0).isSelected());
+        Assert.assertFalse(elementCheckBoxPage.subCheckBoxes.get(0).isSelected());
+    }
+
 }
