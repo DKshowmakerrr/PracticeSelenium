@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -46,9 +47,10 @@ public class baseTest {
             driver.get(url);
         }
     }
-    public void waitForPageLoad() {
-        if (driver!= null) {
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void waitForElement(WebElement element) {
+        if (driver != null) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.visibilityOf(element));
         }
     }
 

@@ -25,6 +25,32 @@ public class testRadioButtonPage extends baseTest {
         closeBrowser();
     }
 
-    @Test
+    @Test (priority = 0) //default la nonselect
+    public void checkdefault() {
+        waitForElement(elementPageRadio.yesButton);
+        Assert.assertFalse(elementPageRadio.yesButton.isSelected());
+
+        waitForElement(elementPageRadio.impressiveButton);
+        Assert.assertFalse(elementPageRadio.impressiveButton.isSelected());
+
+        waitForElement(elementPageRadio.noButton);
+        Assert.assertFalse(elementPageRadio.noButton.isEnabled());
+    }
+
+    @Test (priority = 1) //chon yes
+    public void checkYes() throws InterruptedException {
+        scrollAndClick(elementPageRadio.yesButton);
+        Assert.assertTrue(elementPageRadio.yesButton.isSelected());
+        Assert.assertFalse(elementPageRadio.impressiveButton.isSelected());
+        Assert.assertFalse(elementPageRadio.noButton.isSelected());
+    }
+
+    @Test (priority = 2) //chon impressive
+    public void checkImpressive() throws InterruptedException {
+        scrollAndClick(elementPageRadio.impressiveButton);
+        Assert.assertFalse(elementPageRadio.yesButton.isSelected());
+        Assert.assertTrue(elementPageRadio.impressiveButton.isSelected());
+        Assert.assertFalse(elementPageRadio.noButton.isSelected());
+    }
 
 }
