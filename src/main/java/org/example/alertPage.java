@@ -5,19 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.Set;
-
-public class browserWindowPage extends baseTest {
+public class alertPage extends baseTest {
 
     //element cua cac button
-    @FindBy(xpath = "//button[@title='New Tab']")
-    public WebElement newTabButton;
+    @FindBy(xpath = "//button[@onclick='showAlert()']")
+    public WebElement alertButton;
 
-    @FindBy(xpath = "//button[@title='New Window']")
-    public WebElement newWindowButton;
-
-    @FindBy(xpath = "//button[@title='New Window Message']")
-    public WebElement newWMButton;
+    @FindBy(xpath = "//button[@onclick='myPromp()']")
+    public WebElement click4MeButton;
 
 
     // thiet lap page factory

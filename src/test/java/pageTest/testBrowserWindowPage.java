@@ -21,22 +21,34 @@ public class testBrowserWindowPage extends baseTest {
         elementBrowserWindow.elementPageFactory(driver);
         //cookieButton.click();
     }
-    Set<String> beforeWindows = driver.getWindowHandles();
-    int beforeSize = beforeWindows.size();
 
     @AfterClass
     public void closeDriver() {
         closeBrowser();
     }
 
-    @Test //click vao button new tab va xac dinh no mo 1 tab moi
+    @Test (priority = 0) //click vao button new tab va xac dinh no mo 1 tab moi va chuyen qua tab moi
     public void testBrowserWindow () throws InterruptedException {
+        Set<String> beforeWindows = driver.getWindowHandles();
+        int beforeSize = beforeWindows.size();
+
         scrollAndClick(elementBrowserWindow.newTabButton);
         Set<String> afterWindows = driver.getWindowHandles();
         int afterSize = afterWindows.size();
-        Assert.assertEquals(afterSize, beforeSize + 1); //kiem tra so luong tab sau khi click
+
+        Assert.assertEquals(afterSize, beforeSize + 1);
+        for(String handle: afterWindows) {
+            if (!beforeWindows.contains(handle)) {
+                driver.switchTo().window(handle);
+                break;
+            }
+        }
     }
 
+    @Test (priority = 1) //dong tab moi
+    public void closeNewTab() throws InterruptedException {
+        driver.close();
+    }
 
 
 }
